@@ -49,8 +49,32 @@
 
 
 
-## 接口文档解析
+### 接口文档解析
 
 ```python
-python doo.py
+python data.py
+```
+
+## Mock
+
+在合适的目录，如 D:\\doo 目录下，打开 CMD 命令行窗口，输入如下命令
+```
+doo
+cd doo_example
+python app.py
+```
+如果看到如下信息
+
+```shell
+* Restarting with stat
+* Debugger is active!
+* Debugger PIN: 248-052-080
+* Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+```
+OK，Mock 已经启动起来了。
+
+运行指定的接口文档(如: weibo.xlsx)，直接带上文件名即可，执行命令如下：
+
+```
+python app.py weibo.xlsx
 ```
