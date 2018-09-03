@@ -24,8 +24,8 @@ def doo():
     doo_folder = os.path.join(current_dir, 'doo_example')
     if not mkdir(doo_folder):
         return
-    copyfile(os.path.join(sweetest_dir, 'EMOS.xlsx'),
-             os.path.join(doo_folder, 'EMOS.xlsx'))
+    copyfile(os.path.join(sweetest_dir, 'example.xlsx'),
+             os.path.join(doo_folder, 'example.xlsx'))
     copyfile(os.path.join(sweetest_dir, 'app.py'),
              os.path.join(doo_folder, 'app.py'))
 

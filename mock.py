@@ -21,15 +21,14 @@ def func():
             return response('{key}', request, params{pkws})"""
 
 
-def welcome(name=None):
+def home():
     '''
     描述: 欢迎页面
     '''
 
-    if name is None:
-        return {'message': 'Welcome to Doo!'}
-    return {'message': 'Welcome to Doo, %s!\n \
-    Github:https://github.com/tonglei100/doo' % name}
+    return {'Name': 'Doo',
+            'Author': 'tonglei',
+            'Github': 'https://github.com/tonglei100/doo'}
 
 
 def check_body(body_doc, body_real, **kwarg):
@@ -70,7 +69,7 @@ def response(api, request: http.Request, params, **kwarg):
 if len(sys.argv) >1:
     excel_file = sys.argv[1]
 else:
-    excel_file = 'EMOS.xlsx'
+    excel_file = 'example.xlsx'
 
 e = Excel(excel_file)
 doc = e.get_data()
@@ -86,7 +85,8 @@ for key in doc:
             pkws += ', ' + k[1:-1] + '=' + k[1:-1]
         exec(func())
 
-routes = []
+routes = [Route('/', method='GET', handler=home)]
+
 for key in doc:
     url = doc[key]['接口地址']
     method = doc[key]['方法']

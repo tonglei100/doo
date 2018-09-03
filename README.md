@@ -1,8 +1,10 @@
-# doo
+# Doo
+
+Doo 是一款简单易用的接口管理解决方案，支持接口文档管理、Mock服务，接口测试等功能。
 
 ## 接口文档模板
 
-模板：doo.xlsx
+模板：example.xlsx
 
 ### INDEX 页面
 
@@ -13,7 +15,9 @@
 | Title       | EOMS接口文档          |
 | Description |                   |
 | Version     | 1.0               |
-| BasePath    | <http://emos.com> |
+| BasePath    | <http://example.com> |
+
+注：此网址为虚构，仅作演示作用
 
 也可以提供全局请求和响应的 Headers
 
@@ -48,17 +52,11 @@
 |测试数据备注|        |    |      |    |      |正常场景                         |
 
 
-
-### 接口文档解析
-
-```python
-python data.py
-```
-
 ## Mock
 
 在合适的目录，如 D:\\doo 目录下，打开 CMD 命令行窗口，输入如下命令
-```
+
+```shell
 doo
 cd doo_example
 python app.py
@@ -71,10 +69,11 @@ python app.py
 * Debugger PIN: 248-052-080
 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
 ```
+
 OK，Mock 已经启动起来了。
 
-运行指定的接口文档(如: weibo.xlsx)，直接带上文件名即可，执行命令如下：
+运行指定的接口文档(如: example.xlsx)，直接带上文件名即可，执行命令如下：
 
 ```
-python app.py weibo.xlsx
+python app.py example.xlsx
 ```
