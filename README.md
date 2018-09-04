@@ -47,7 +47,7 @@ OK，Mock 已经启动起来了。
 
 doo_example 目录下的 doo.postman_collection.json 为 Postman 用例集
 
-把改文件导入到 Postman 即可对 Mock 进行验证。
+把该文件导入到 Postman 即可对 Mock 进行验证。
 
 > 备注：collection 格式为比较新的2.1版本，请尽量把 Postman 升级到最新版本。
 
