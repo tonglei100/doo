@@ -1,4 +1,4 @@
-![sweetest](https://github.com/tonglei100/doo/blob/master/logo.png?raw=true)
+![Doo](https://github.com/tonglei100/doo/blob/master/logo.png?raw=true)
 
 # Doo
 
@@ -64,7 +64,7 @@ example.xlsx
 | Version     | 1.0               |
 | BasePath    | <http://example.com> |
 
-注：此网址为虚构，仅作演示作用
+注：此网址为虚构，仅作示例
 
 也可以提供全局请求和响应的 Headers
 
