@@ -170,7 +170,7 @@ def body_data(body):
 
 
 if __name__ == '__main__':
-    e = Excel('EMOS.xlsx')
+    e = Excel('example.xlsx')
     data = e.get_data()
 
     print('--- INDEX ---')

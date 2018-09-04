@@ -62,7 +62,7 @@ def response(api, request: http.Request, params, **kwarg):
     for i in range(len(req_data_doc)):
         result = check_body(req_data_doc[i], body, **kwarg)
         if result:
-            return http.JSONResponse(res_data_doc[i], status_code=200, headers=doc[api]['RESPONSE']['Headers'])
+            return http.JSONResponse(res_data_doc[i], status_code=doc[api]['status_code'][i], headers=doc[api]['RESPONSE']['Headers'])
 
     return http.JSONResponse('No body data matching', status_code=404)
 

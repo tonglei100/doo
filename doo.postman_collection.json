@@ -6,7 +6,7 @@
 	},
 	"item": [
 		{
-			"name": "admin账号登录",
+			"name": "Login: admin账号登录",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -39,7 +39,7 @@
 			"response": []
 		},
 		{
-			"name": "错误账号登录",
+			"name": "Login: 错误账号登录",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -72,7 +72,7 @@
 			"response": []
 		},
 		{
-			"name": "获取用户信息",
+			"name": "User: 获取用户信息",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -105,7 +105,7 @@
 			"response": []
 		},
 		{
-			"name": "查询新闻",
+			"name": "News: 查询新闻#10002",
 			"request": {
 				"method": "GET",
 				"header": [],
