@@ -126,6 +126,9 @@ def doc2json(data, index):
                 flag = 'RESPONSE'
                 one['status_code'] = [int(v) for v in d[6:6 + num]]
                 continue
+            elif d[0] == '响应延时':
+                one['delay'] = [float(v) if v else 0 for v in d[6:6 + num]]
+
             elif d[0] == '测试数据备注':
                 flag = 'NEW'
                 one['remark'] = [v for v in d[6:6 + num]]

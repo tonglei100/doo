@@ -1,6 +1,7 @@
 from apistar import Route, Include, http
 import copy
 import sys
+from time import sleep
 from doo.cap import CapApp
 from doo.excel import Excel
 
@@ -62,6 +63,8 @@ def response(api, request: http.Request, params, **kwarg):
     for i in range(len(req_data_doc)):
         result = check_body(req_data_doc[i], body, **kwarg)
         if result:
+            if doc[api].get('delay'):
+                sleep(doc[api]['delay'][i])
             return http.JSONResponse(res_data_doc[i], status_code=doc[api]['status_code'][i], headers=doc[api]['RESPONSE']['Headers'])
 
     return http.JSONResponse('No body data matching', status_code=404)
