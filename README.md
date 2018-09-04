@@ -97,6 +97,6 @@ example.xlsx
 |        | account  | 用户名  | string | Y    |        | admin                             |
 |        | password | 密码   | string | Y    |        | 123456                            |
 | 响应     |          |      |        |      |        | 200                               |
-|        | Body     | 报文   | json   | Y    | json格式 | {"code: "0", "message":"success"} |
-|        | nickname | 管理员  | string | N    | 用户昵称   | admin                             |
+|        | Body     | 报文Body| json   | Y    | json格式 | {"code: "0", "message":"success"} |
+|        | nickname | 昵称  | string | N    | 用户昵称   | admin                             |
 | 测试数据备注 |          |      |        |      |        | 正常场景                              |

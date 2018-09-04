@@ -6,7 +6,7 @@
 	},
 	"item": [
 		{
-			"name": "http://127.0.0.1:5000/api/authentication/login",
+			"name": "admin账号登录",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -39,7 +39,40 @@
 			"response": []
 		},
 		{
-			"name": "http://127.0.0.1:5000/api/user/100001",
+			"name": "错误账号登录",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"account\": \"xiaoming\",\r\n\t\"password\": \"Oxhhddd\"\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/authentication/login",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"authentication",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "获取用户信息",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -72,13 +105,13 @@
 			"response": []
 		},
 		{
-			"name": "http://127.0.0.1:5000/api/news?id=1",
+			"name": "查询新闻",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "http://127.0.0.1:5000/api/news?id=1",
+					"raw": "http://127.0.0.1:5000/api/news?id=10002",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -94,7 +127,7 @@
 					"query": [
 						{
 							"key": "id",
-							"value": "1"
+							"value": "10002"
 						}
 					]
 				}
