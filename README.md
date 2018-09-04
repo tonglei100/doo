@@ -4,9 +4,54 @@
 
 Doo 是一款简单易用的接口管理解决方案，支持接口文档管理、Mock服务，接口测试等功能。
 
+
+## 安装
+
+### 初次安装
+
+```
+pip install doo
+```
+
+### 升级
+
+```
+pip install -U doo
+```
+
+## 快速体验
+
+### Mock
+
+在合适的目录，如 D:\\doo 目录下，打开 CMD 命令行窗口，输入如下命令
+
+```shell
+doo
+cd doo_example
+python app.py
+```
+如果看到如下信息
+
+```shell
+* Restarting with stat
+* Debugger is active!
+* Debugger PIN: 248-052-080
+* Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+```
+
+OK，Mock 已经启动起来了。
+
+运行指定的接口文档(如: example.xlsx)，直接带上文件名即可，执行命令如下：
+
+```
+python app.py example.xlsx
+```
+
 ## 接口文档模板
 
-模板：example.xlsx
+### 模板
+
+example.xlsx
 
 ### INDEX 页面
 
@@ -52,30 +97,3 @@ Doo 是一款简单易用的接口管理解决方案，支持接口文档管理�
 |      |Body    |报文  |json  |Y   |json格式|{"code: "0", "message":"success"}|
 |      |nickname|管理员 |string|N   |用户昵称  |admin                          |
 |测试数据备注|        |    |      |    |      |正常场景                         |
-
-
-## Mock
-
-在合适的目录，如 D:\\doo 目录下，打开 CMD 命令行窗口，输入如下命令
-
-```shell
-doo
-cd doo_example
-python app.py
-```
-如果看到如下信息
-
-```shell
-* Restarting with stat
-* Debugger is active!
-* Debugger PIN: 248-052-080
-* Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
-```
-
-OK，Mock 已经启动起来了。
-
-运行指定的接口文档(如: example.xlsx)，直接带上文件名即可，执行命令如下：
-
-```
-python app.py example.xlsx
-```
