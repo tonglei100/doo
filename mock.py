@@ -24,7 +24,7 @@ def func():
 
 def home():
     '''
-    描述: 欢迎页面
+    描述: Doo 首页
     '''
 
     return {'Name': 'Doo',

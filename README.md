@@ -64,7 +64,7 @@ example.xlsx
 
 | Field       | Value                |
 | ----------- | -------------------- |
-| Title       | EOMS接口文档         |
+| Title       | EOMS接口文档          |
 | Description |                      |
 | Version     | 1.0                  |
 | BasePath    | <http://example.com> |
@@ -76,7 +76,7 @@ example.xlsx
 | 请求Headers | 参数名          | 测试数据                       |
 | ----------- | ------------ | --------------------------------- |
 |             | Content-Type | application/x-www-form-urlencoded |
-|响应Headers  |              |                                   |
+| 响应Headers  |              |                                   |
 |             | Content-Type | application/json                  |
 
 ### 接口页面
