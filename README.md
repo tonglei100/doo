@@ -36,11 +36,21 @@ python app.py
 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
 ```
 
-OK，Mock 已经启动起来了。
+OK，示例 Mock 已经启动起来了。
 
-运行指定的接口文档(如: example.xlsx)，直接带上文件名即可，执行命令如下：
+Mock 接口文档有3种方式：
+
+1. 运行 Excel 接口文档(如: example.xlsx)，直接带上文件名即可，执行命令如下：
 
     python app.py example.xlsx
+
+2. 运行 yaml 接口文档(如: example.yml)，执行命令如下：
+
+    python app.py example.yml
+
+3. 运行指定目录下的所有 yaml 接口文档(如: D:\\doc)，执行命令如下：
+
+    python app.py D:\\doc
 
 
 ### Postman 测试
@@ -109,6 +119,9 @@ DATA1:
   remark: admin 账户登录  #可选，默认为 ''
 
 ```
+
+备注：在 Mock 单个或多个 yaml 接口文档时，通用描述部分，只能有1份，如果有多份，则只有最后被读取的有效。
+
 
 ### 2. Excel 模板
 
