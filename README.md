@@ -2,7 +2,7 @@
 
 # Doo
 
-Doo 是一款简单易用的接口管理解决方案，支持接口文档管理、Mock服务，接口测试等功能。Doo 接口文档采用 yaml 或 Excel 格式书写，简单快捷，Mock 基于该文档，无需数据库，一条命令秒变 Mock 服务。
+Doo 是一款简单易用的接口管理解决方案，支持接口文档管理、Mock服务，接口测试等功能。接口文档采用 yaml 或 Excel 格式书写，简单快捷，Mock 基于该文档，无需数据库，一条命令秒变 Mock 服务。
 
 
 ## 安装
@@ -47,7 +47,7 @@ OK，Mock 已经启动起来了。
 
 doo_example 目录下的 doo.postman_collection.json 为 Postman 用例集
 
-把该文件导入到 Postman 即可对 Mock 进行验证。
+把该文件导入到 Postman 即可对示例 Mock 进行验证。
 
 > 备注：collection 格式为比较新的2.1版本，请尽量把 Postman 升级到最新版本。
 
