@@ -1,0 +1,174 @@
+--- # 通用描述
+Title: Example 接口文档
+Description: ''
+Version: '1.0'
+BasePath: http://example.com
+REQUEST_Headers:
+  Content-Type: application/json
+RESPONSE_Headers:
+  Content-Type: application/json
+
+
+--- # 最简版接口描述
+Name: LOGIN
+Desc: 账号登录
+Path: /api/authentication/login
+Method: POST
+
+REQUEST:
+  Body:
+    # 参数名: [类型, 是否必传, 中文名称, 备注]
+    account: [string, Y, 用户名, 手机号/邮箱]
+    password: [string,Y, 密码, 6~12位数字字母组合]
+
+RESPONSE:
+  Body:
+    # json 支持多层嵌套
+    Body: {code: [string, Y, 错误码, 报文里的错误码], message: [string, Y, 提示信息, 出错时信息]}
+    nickname: [string, N, 昵称, 用户昵称]
+
+
+---  # 完整版接口描述
+Name: LOGIN
+Desc: 账号登录
+Path: /api/authentication/login
+Method: POST
+GROUP: USER
+Auth: None
+
+REQUEST:
+  Headers:
+    Content-Type: application/json
+  Body:
+    # 参数名: [类型, 是否必传, 中文名称, 备注]
+    account: [string, Y, 用户名, 手机号/邮箱]
+    password: [string,Y, 密码, 6~12位数字字母组合]
+
+RESPONSE:
+  Headers:
+    Content-Type: application/json
+  Body:
+    # json 支持多层嵌套
+    Body: {code: [string, Y, 错误码, 报文里的错误码], message: [string, Y, 提示信息, 出错时信息]}
+    nickname: [string, N, 昵称, 用户昵称]
+
+# 以下为 Mock 测试数据，根据需要填写
+DATA1:
+  REQUEST:
+    account: admin
+    password: '123456'
+  RESPONSE:
+    code: '0'
+    message: success
+    nickname: admin
+  status_code: 200  #可选，默认为 200
+  delay: 0.5  #可选，默认为 0
+  remark: admin 账户登录  #可选，默认为 ''
+
+DATA2:
+  REQUEST:
+    account: xiaoming
+    password: '123456'
+  RESPONSE:
+    code: '0'
+    message: success
+    nickname: xiaoming
+
+DATA3:
+  REQUEST:
+    account: xiaoming
+    password: Oxhhddd
+  RESPONSE:
+    code: '10001'
+    message: account or password error
+  status_code: 401
+  delay: 1
+  remark: 密码错误登录
+
+---
+Name: USER
+Desc: 获取用户信息
+Path: "/api/user/{user_id}"
+Method: POST
+Auth: None
+GROUP: USER
+
+REQUEST:
+  Headers:
+    Content-Type: application/json
+  Body:
+    "{user_id}": [int, Y, 用户ID, '']
+    type: [string, N, 信息类型, '']
+
+RESPONSE:
+  Headers:
+    Content-Type: application/json
+  Body:
+    Body: [json, Y, 报文Body, json格式]
+
+DATA1:
+  REQUEST:
+    "{user_id}": 100001
+    type: base
+  RESPONSE:
+    name: admin
+    age: 18
+  status_code: 200
+  remark: 正常场景
+
+DATA2:
+  REQUEST:
+    "{user_id}": 100002
+    type: base
+  RESPONSE:
+    code: '401'
+    message: fail
+  status_code: 401
+  remark: ''
+
+---
+Name: NEWS
+Desc: 获取新闻详情
+Path: "/api/news"
+Method: GET
+Auth: None
+GROUP: USER
+
+REQUEST:
+  Body:
+    id: [string, Y, 新闻ID, '']
+
+RESPONSE:
+  Headers:
+    Content-Type: application/json
+  Body:
+    Body: [json, Y, 报文Body, json格式]
+
+DATA1:
+  REQUEST:
+    id: '10001'
+  RESPONSE:
+    code: '0'
+    message: success
+    context: This is a test
+  status_code: 200
+  remark: 新闻1
+
+DATA2:
+  REQUEST:
+    id: '10002'
+  RESPONSE:
+    code: '0'
+    message: success
+    context: This is a test2
+  status_code: 200
+  remark: 新闻2
+
+DATA3:
+  REQUEST:
+    id: '10003'
+  RESPONSE:
+    code: '0'
+    message: No news id
+  status_code: 404
+  remark: 无此新闻

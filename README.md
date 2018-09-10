@@ -2,7 +2,7 @@
 
 # Doo
 
-Doo 是一款简单易用的接口管理解决方案，支持接口文档管理、Mock服务，接口测试等功能。
+Doo 是一款简单易用的接口管理解决方案，支持接口文档管理、Mock服务，接口测试等功能。Doo 接口文档采用 yaml 或 Excel 格式书写，简单快捷，Mock 基于该文档，无需数据库，一条命令秒变 Mock 服务。
 
 
 ## 安装
@@ -54,11 +54,67 @@ doo_example 目录下的 doo.postman_collection.json 为 Postman 用例集
 
 ## 接口文档模板
 
-### 模板
+### 1. yaml 模板
+
+example.yml
+
+#### 模板格式
+
+```yml
+--- # 通用描述
+Title: Example 接口文档
+Description: ''
+Version: '1.0'
+BasePath: http://example.com
+REQUEST_Headers:
+  Content-Type: application/json
+RESPONSE_Headers:
+  Content-Type: application/json
+
+---  # 接口描述
+Name: LOGIN
+Desc: 账号登录
+Path: /api/authentication/login
+Method: POST
+GROUP: USER
+Auth: None
+
+REQUEST:
+  Headers:
+    Content-Type: application/json
+  Body:
+    # 参数名: [类型, 是否必传, 中文名称, 备注]
+    account: [string, Y, 用户名, 手机号/邮箱]
+    password: [string,Y, 密码, 6~12位数字字母组合]
+
+RESPONSE:
+  Headers:
+    Content-Type: application/json
+  Body:
+    # json 支持多层嵌套
+    Body: {code: [string, Y, 错误码, 报文里的错误码], message: [string, Y, 提示信息, 出错时信息]}
+    nickname: [string, N, 昵称, 用户昵称]
+
+# 以下为 Mock 测试数据，根据需要填写
+DATA1:
+  REQUEST:
+    account: admin
+    password: '123456'
+  RESPONSE:
+    code: '0'
+    message: success
+    nickname: admin
+  status_code: 200  #可选，默认为 200
+  delay: 0.5  #可选，默认为 0
+  remark: admin 账户登录  #可选，默认为 ''
+
+```
+
+### 2. Excel 模板
 
 example.xlsx
 
-### INDEX 页面
+#### INDEX 页面
 
 目前采用 Excel 来书写接口文档，其中 INDEX 是基本信息页，提供如下信息：
 
@@ -79,7 +135,7 @@ example.xlsx
 | 响应Headers  |              |                                   |
 |             | Content-Type | application/json                  |
 
-### 接口页面
+#### 接口页面
 
 除了 INDEX 页面外，其他页面为接口页面。一个接口页面为一组，可以有多个接口页面。
 在每个接口页面，需要填写的信息如下：

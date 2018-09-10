@@ -26,9 +26,11 @@ def doo():
         return
     copyfile(os.path.join(sweetest_dir, 'example.xlsx'),
              os.path.join(doo_folder, 'example.xlsx'))
+    copyfile(os.path.join(sweetest_dir, 'example.yml'),
+             os.path.join(doo_folder, 'example.yml'))
     copyfile(os.path.join(sweetest_dir, 'app.py'),
              os.path.join(doo_folder, 'app.py'))
     copyfile(os.path.join(sweetest_dir, 'doo.postman_collection.json'),
              os.path.join(doo_folder, 'doo.postman_collection.json'))
 
-    print('\n生成 doo example 成功\n')
+    print('\n生成 doo example 成功\n\n请运行如下命令启动示例 Mock 服务\n\ncd doo_example\npython app.py example.yml')

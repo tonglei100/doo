@@ -1,9 +1,10 @@
 from apistar import Route, Include, http
 import copy
 import sys
+from pathlib import Path
 from time import sleep
 from doo.cap import CapApp
-from doo.excel import Excel
+from doo.data import Excel, Yaml
 
 
 type_map = {'int': 'int',
@@ -46,7 +47,7 @@ def check_body(body_doc, body_real, **kwarg):
 def response(api, request: http.Request, params, **kwarg):
     params = dict(params)
     headers = dict(request.headers)
-    if doc[api]['方法'] == 'POST':
+    if doc[api]['Method'] == 'POST':
         body = eval(request.body.decode('utf-8'))
     else:
         body = {}
@@ -57,42 +58,57 @@ def response(api, request: http.Request, params, **kwarg):
             return http.JSONResponse(f'Headers is not matching\ndoc \
             {k}:{headers_doc[k]}\nreal {k}:{headers.get(k)}', status_code=404)
 
-    req_data_doc = doc[api]['REQUEST']['Data']
-    res_data_doc = doc[api]['RESPONSE']['Data']
     body = dict(body, **params)
-    for i in range(len(req_data_doc)):
-        result = check_body(req_data_doc[i], body, **kwarg)
-        if result:
-            if doc[api].get('delay'):
-                sleep(doc[api]['delay'][i])
-            return http.JSONResponse(res_data_doc[i], status_code=doc[api]['status_code'][i], headers=doc[api]['RESPONSE']['Headers'])
+    for data in doc[api]:
+        if 'DATA' in data:
+            result = check_body(doc[api][data]['REQUEST'], body, **kwarg)
+            if result:
+                if doc[api][data].get('delay'):
+                    sleep(doc[api][data]['delay'])
+                return http.JSONResponse(doc[api][data]['RESPONSE'], status_code=doc[api][data]['status_code'], headers=doc[api]['RESPONSE']['Headers'])
 
     return http.JSONResponse('No body data matching', status_code=404)
 
+doc = {}
 if len(sys.argv) >1:
-    excel_file = sys.argv[1]
-else:
-    excel_file = 'example.xlsx'
+    api_file = sys.argv[1]
+    path = Path(api_file)
 
-e = Excel(excel_file)
-doc = e.get_data()
+    if path.exists():
+        if path.suffix == '.xlsx':
+                e = Excel(api_file)
+                doc = e.get_data()
+        else :
+            y = Yaml(path)
+            doc = y.get_data()
+    else:
+        print(f'--- The api file/folder:{api_file} is not exists ---')
+        sys.exit(-1)
+else:
+    if Path('example.xlsx').exists():
+        api_file = str(Path('example.xlsx'))
+    elif Path('example.yml').exists():
+        api_file = str(Path('example.yml'))
+    else:
+        print('--- Please input .xlsx or .yml file ---')
+        sys.exit(-1)
 
 for key in doc:
-    desc = doc[key]['描述']
+    desc = doc[key]['Desc']
     pkts = ''
     pkws = ''
     body = doc[key]['REQUEST']['Body']
     for k in body:
         if k.startswith('{') and k.endswith('}'):
-            pkts += ', ' + k[1:-1] + ': ' + type_map[body[k]['type'].lower()]
+            pkts += ', ' + k[1:-1] + ': ' + type_map[body[k][0].lower()]
             pkws += ', ' + k[1:-1] + '=' + k[1:-1]
         exec(func())
 
 routes = [Route('/', method='GET', handler=home)]
 
 for key in doc:
-    url = doc[key]['接口地址']
-    method = doc[key]['方法']
+    url = doc[key]['Path']
+    method = doc[key]['Method']
     handler = getattr(sys.modules[__name__], key.lower())
 
     routes.append(Route(url, method=method, handler=handler))
