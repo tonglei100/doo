@@ -142,11 +142,11 @@ example.xlsx
 
 也可以提供全局请求和响应的 Headers
 
-| 请求Headers | 参数名          | 测试数据                       |
-| ----------- | ------------ | --------------------------------- |
-|             | Content-Type | application/x-www-form-urlencoded |
-| 响应Headers  |              |                                   |
-|             | Content-Type | application/json                  |
+| Request Headers | 参数名          | 测试数据                       |
+| --------------- | ------------ | --------------------------------- |
+|                 | Content-Type | application/x-www-form-urlencoded |
+| Response Headers|              |                                   |
+|                 | Content-Type | application/json                  |
 
 #### 接口页面
 
@@ -157,7 +157,7 @@ example.xlsx
 | ------ | -------------------------- |
 | 名称   | 登录                       |
 | 描述   | 账号登录接口               |
-| 接口地址| /api/authentication/login |
+| 接口   | /api/authentication/login |
 | 方法   | POST                       |
 | 权限   | None                       |
 
