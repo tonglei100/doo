@@ -5,6 +5,19 @@
 Doo 是一款简单易用的接口管理解决方案，支持接口文档管理、Mock服务，接口测试等功能。接口文档采用 yaml 或 Excel 格式书写，简单快捷，Mock 基于该文档，无需数据库，一条命令秒变 Mock 服务。
 
 
+## 关注
+
+Doo 是 Sweetest 的姊妹项目，所以 QQ 交流群和微信公众号合并到 Sweetest ，欢迎加入：
+
+微信公众号：安装、配置、使用的详细图文说明，最新版本发布更新说明
+
+QQ 交流群：158755338 (验证码：python)
+
+扫描**公众号**及**QQ群**二维码加入我们
+
+![Doo](https://github.com/tonglei100/sweetest/blob/master/snapshot/sweetest.jpg?raw=true)
+
+
 ## 安装
 
 ### 初次安装
