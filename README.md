@@ -181,5 +181,5 @@ example.xlsx
 | 响应   |          |          |        |         |        | 200                               |
 |        | Body     | 报文Body | json   | Y       |json格式| {"code: "0", "message":"success"} |
 |        | nickname | 昵称     | string | N       |用户昵称| admin                             |
-|响应延时|          |          |        |         |        | 0.5                               |
+| 响应延时|          |          |        |         |        | 0.5                               |
 | 测试数据备注 |    |          |        |         |        | 正常场景                          |

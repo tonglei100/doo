@@ -87,8 +87,12 @@ if len(sys.argv) >1:
 else:
     if Path('example.xlsx').exists():
         api_file = str(Path('example.xlsx'))
+        e = Excel(api_file)
+        doc = e.get_data()
     elif Path('example.yml').exists():
         api_file = str(Path('example.yml'))
+        y = Yaml(path)
+        doc = y.get_data()
     else:
         print('--- Please input .xlsx or .yml file ---')
         sys.exit(-1)
@@ -102,7 +106,7 @@ for key in doc:
         if k.startswith('{') and k.endswith('}'):
             pkts += ', ' + k[1:-1] + ': ' + type_map[body[k][0].lower()]
             pkws += ', ' + k[1:-1] + '=' + k[1:-1]
-        exec(func())
+    exec(func())
 
 routes = [Route('/', method='GET', handler=home)]
 

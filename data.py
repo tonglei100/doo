@@ -147,6 +147,9 @@ def doc2json(data, index):
                 num = len([v for v in d[6:] if v])
                 if one['Method'] == 'GET':
                     one['REQUEST']['Headers'].pop('Content-Type')
+                for i in range(num):
+                    if not one.get('DATA'+str(i+1)):
+                        one['DATA'+str(i+1)] = {'REQUEST':{}, 'RESPONSE': {}}
                 continue
             elif d[0].upper() in ('响应', 'RESPONSE'):
                 flag = 'RESPONSE'
