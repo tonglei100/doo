@@ -3,6 +3,7 @@ import xlsxwriter
 import json
 import copy
 import yaml
+import sys
 from pathlib import Path
 
 class Excel:
@@ -118,6 +119,12 @@ def message(protocol, d, one, headers=False, num=0):
                 else:
                     one['DATA'+str(i+1)][protocol][d[1]] = t
 
+                if protocol == 'REQUEST' and str(t) == '*':
+                    if not one['DATA'+str(i+1)].get('star'):
+                        one['DATA'+str(i+1)]['star'] = 1
+                    else:
+                        one['DATA'+str(i+1)]['star'] += 1
+
     return one
 
 
@@ -172,6 +179,15 @@ def doc2json(data, index):
                 one['Name'] = one['Name'].upper()
                 # one['REQUEST']['Data'] = body_data(one['REQUEST']['Body'])
                 # one['RESPONSE']['Data'] = body_data(one['RESPONSE']['Body'])
+                star = {}
+                for k,v in one.items():
+                    if 'DATA' in k and one[k].get('star'):
+                        star[k] = one[k]['star']
+                star = sorted(star.items(), key=lambda d:d[1],reverse=False)
+                for k in dict(star):
+                    v = one[k]
+                    one.pop(k)
+                    one[k] = v
                 doc[one['Name']] = one
 
 
@@ -197,6 +213,24 @@ class Yaml():
             for api in y:
                 if api.get('Name'):
                     doc[api['Name'].upper()] = api
+                    star = {}
+                    for k in api:
+                        if 'DATA' in k:
+                            for field,value in api[k]['REQUEST'].items():
+                                if  str(value) == '*':
+                                    if not api[k].get('star'):
+                                        api[k]['star'] = 1
+                                    else:
+                                        api[k]['star'] += 1
+                            if api[k].get('star'):
+                                star[k] = api[k]['star']
+                    star = sorted(star.items(), key=lambda d:d[1],reverse=False)
+                    for k in dict(star):
+                        v = api[k]
+                        api.pop(k)
+                        api[k] = v
+                    doc[api['Name']] = api
+
                 elif api.get('Title'):
                     index = api
 
@@ -210,12 +244,42 @@ class Yaml():
         return doc
 
 
-if __name__ == '__main__':
-    e = Excel('example.xlsx')
-    data = e.get_data()
+def get_doc():
 
-    print('--- INDEX ---')
-    print(json.dumps(e.index, ensure_ascii=False, indent=4))
+    doc = {}
+    if len(sys.argv) >1:
+        api_file = sys.argv[1]
+        path = Path(api_file)
+
+        if path.exists():
+            if path.suffix == '.xlsx':
+                    e = Excel(api_file)
+                    doc = e.get_data()
+            else :
+                y = Yaml(path)
+                doc = y.get_data()
+        else:
+            print(f'--- The api file/folder:{api_file} is not exists ---')
+            sys.exit(-1)
+    else:
+        if Path('example.xlsx').exists():
+            api_file = str(Path('example.xlsx'))
+            e = Excel(api_file)
+            doc = e.get_data()
+        elif Path('example.yml').exists():
+            api_file = str(Path('example.yml'))
+            y = Yaml(path)
+            doc = y.get_data()
+        else:
+            print('--- Please input .xlsx or .yml file ---')
+            sys.exit(-1)
+
+    return doc
+
+
+if __name__ == '__main__':
+
+    doc = get_doc()
 
     print('\n--- DOC ---')
-    print(json.dumps(e.doc, ensure_ascii=False, indent=4))
+    print(json.dumps(doc, ensure_ascii=False, indent=4))

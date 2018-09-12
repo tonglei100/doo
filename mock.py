@@ -4,7 +4,7 @@ import sys
 from pathlib import Path
 from time import sleep
 from doo.cap import CapApp
-from doo.data import Excel, Yaml
+from doo.data import Excel, Yaml, get_doc
 
 
 type_map = {'int': 'int',
@@ -35,6 +35,11 @@ def home():
 
 def check_body(body_doc, body_real, **kwarg):
     for k in body_doc:
+        # 如果是星号，则匹配所有值
+        if body_doc[k] == '*':
+            continue
+        if body_doc[k].startswith('\\'):
+            body_doc[k] = body_doc[k][1:]
         if k.startswith('{') and k.endswith('}'):
             if body_doc[k] != kwarg.get(k[1:-1]):
                 return False
@@ -69,33 +74,7 @@ def response(api, request: http.Request, params, **kwarg):
 
     return http.JSONResponse('No body data matching', status_code=404)
 
-doc = {}
-if len(sys.argv) >1:
-    api_file = sys.argv[1]
-    path = Path(api_file)
-
-    if path.exists():
-        if path.suffix == '.xlsx':
-                e = Excel(api_file)
-                doc = e.get_data()
-        else :
-            y = Yaml(path)
-            doc = y.get_data()
-    else:
-        print(f'--- The api file/folder:{api_file} is not exists ---')
-        sys.exit(-1)
-else:
-    if Path('example.xlsx').exists():
-        api_file = str(Path('example.xlsx'))
-        e = Excel(api_file)
-        doc = e.get_data()
-    elif Path('example.yml').exists():
-        api_file = str(Path('example.yml'))
-        y = Yaml(path)
-        doc = y.get_data()
-    else:
-        print('--- Please input .xlsx or .yml file ---')
-        sys.exit(-1)
+doc = get_doc()
 
 for key in doc:
     desc = doc[key]['Desc']
