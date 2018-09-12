@@ -85,6 +85,15 @@ DATA3:
   delay: 1
   remark: 密码错误登录
 
+DATA4:
+  REQUEST:
+    account: guess
+    password: '*'
+  RESPONSE:
+    code: '0'
+    message: success
+    nickname: xiaoming
+    
 ---
 Name: USER
 Desc: 获取用户信息

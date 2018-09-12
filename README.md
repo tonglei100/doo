@@ -183,3 +183,26 @@ example.xlsx
 |        | nickname | 昵称     | string | N       |用户昵称| admin                             |
 | 响应延时|          |          |        |         |        | 0.5                               |
 | 测试数据备注 |    |          |        |         |        | 正常场景                          |
+
+
+### 其他
+
+#### 请求数据任意值匹配
+
+只需要在测试数据中填写星号(*)，如
+
+```
+DATA1:
+  REQUEST:
+    account: guess
+    password: '*'
+  RESPONSE:
+    code: '0'
+    message: success
+    nickname: guess
+```
+则请求中，只需要 account 为 guess，就会匹配到该条响应数据
+
+Excel 格式的测试数据也一样。
+
+如果想想匹配的值就是星号(*)，则测试数据需要转移为'\*'，相应的，如果值是'\\'开头,则测试数据要写'\\\\'

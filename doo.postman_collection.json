@@ -1,12 +1,12 @@
 {
 	"info": {
-		"_postman_id": "759d3cc7-ccf4-4835-9c9a-0a5aa30f4099",
+		"_postman_id": "4d045ba4-94f6-4af2-bd0b-6fd1f7a29f75",
 		"name": "Doo",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Login: admin账号登录",
+			"name": "Login: admin 账号登录",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -50,7 +50,40 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n\t\"account\": \"xiaoming\",\r\n\t\"password\": \"Oxhhddd\"\r\n}"
+					"raw": "{\r\n\t\"account\": \"admin\",\r\n\t\"password\": \"Oxhhddd\"\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/api/authentication/login",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"authentication",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login: guess 任意密码登录",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"account\": \"guess\",\r\n\t\"password\": \"1234567890\"\r\n}"
 				},
 				"url": {
 					"raw": "http://127.0.0.1:5000/api/authentication/login",
@@ -109,7 +142,10 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"url": {
 					"raw": "http://127.0.0.1:5000/api/news?id=10002",
 					"protocol": "http",
