@@ -50,7 +50,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n\t\"account\": \"admin\",\r\n\t\"password\": \"Oxhhddd\"\r\n}"
+					"raw": "{\r\n\t\"account\": \"xiaoming\",\r\n\t\"password\": \"Oxhhddd\"\r\n}"
 				},
 				"url": {
 					"raw": "http://127.0.0.1:5000/api/authentication/login",

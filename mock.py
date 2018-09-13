@@ -38,7 +38,7 @@ def check_body(body_doc, body_real, **kwarg):
         # 如果是星号，则匹配所有值
         if body_doc[k] == '*':
             continue
-        if body_doc[k].startswith('\\'):
+        if isinstance(body_doc[k], str) and body_doc[k].startswith('\\'):
             body_doc[k] = body_doc[k][1:]
         if k.startswith('{') and k.endswith('}'):
             if body_doc[k] != kwarg.get(k[1:-1]):
@@ -70,7 +70,8 @@ def response(api, request: http.Request, params, **kwarg):
             if result:
                 if doc[api][data].get('delay'):
                     sleep(doc[api][data]['delay'])
-                return http.JSONResponse(doc[api][data]['RESPONSE'], status_code=doc[api][data]['status_code'], headers=doc[api]['RESPONSE']['Headers'])
+                return http.JSONResponse(doc[api][data]['RESPONSE'], \
+                status_code=doc[api][data].get('status_code', 200), headers=doc[api]['RESPONSE']['Headers'])
 
     return http.JSONResponse('No body data matching', status_code=404)
 

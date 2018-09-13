@@ -30,6 +30,8 @@ def doo():
              os.path.join(doo_folder, 'example.yml'))
     copyfile(os.path.join(sweetest_dir, 'app.py'),
              os.path.join(doo_folder, 'app.py'))
+    copyfile(os.path.join(sweetest_dir, 'data.py'),
+             os.path.join(doo_folder, 'data.py'))             
     copyfile(os.path.join(sweetest_dir, 'doo.postman_collection.json'),
              os.path.join(doo_folder, 'doo.postman_collection.json'))
 

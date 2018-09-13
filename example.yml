@@ -77,7 +77,7 @@ DATA2:
 DATA3:
   REQUEST:
     account: xiaoming
-    password: Oxhhddd
+    password: '*'
   RESPONSE:
     code: '10001'
     message: account or password error
@@ -92,8 +92,8 @@ DATA4:
   RESPONSE:
     code: '0'
     message: success
-    nickname: xiaoming
-    
+    nickname: guess
+
 ---
 Name: USER
 Desc: 获取用户信息

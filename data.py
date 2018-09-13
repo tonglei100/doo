@@ -90,8 +90,6 @@ def message(protocol, d, one, headers=False, num=0):
 
     if d[1]:
         data = [v for v in d[6:6 + num]]
-        # field = {'name': d[1], 'cnname': d[2], 'type': d[3],
-        #          'must': d[4], 'remark': d[5], 'data': data}
         field = [d[3], d[4], d[2], d[5]]
         if headers:
             one[protocol]['Headers'][d[1]] = data[0]
@@ -118,12 +116,6 @@ def message(protocol, d, one, headers=False, num=0):
                     one['DATA'+str(i+1)][protocol] = dict(one['DATA'+str(i+1)][protocol], **t)
                 else:
                     one['DATA'+str(i+1)][protocol][d[1]] = t
-
-                if protocol == 'REQUEST' and str(t) == '*':
-                    if not one['DATA'+str(i+1)].get('star'):
-                        one['DATA'+str(i+1)]['star'] = 1
-                    else:
-                        one['DATA'+str(i+1)]['star'] += 1
 
     return one
 
@@ -177,17 +169,6 @@ def doc2json(data, index):
 
             if flag == 'NEW':
                 one['Name'] = one['Name'].upper()
-                # one['REQUEST']['Data'] = body_data(one['REQUEST']['Body'])
-                # one['RESPONSE']['Data'] = body_data(one['RESPONSE']['Body'])
-                star = {}
-                for k,v in one.items():
-                    if 'DATA' in k and one[k].get('star'):
-                        star[k] = one[k]['star']
-                star = sorted(star.items(), key=lambda d:d[1],reverse=False)
-                for k in dict(star):
-                    v = one[k]
-                    one.pop(k)
-                    one[k] = v
                 doc[one['Name']] = one
 
 
@@ -213,24 +194,6 @@ class Yaml():
             for api in y:
                 if api.get('Name'):
                     doc[api['Name'].upper()] = api
-                    star = {}
-                    for k in api:
-                        if 'DATA' in k:
-                            for field,value in api[k]['REQUEST'].items():
-                                if  str(value) == '*':
-                                    if not api[k].get('star'):
-                                        api[k]['star'] = 1
-                                    else:
-                                        api[k]['star'] += 1
-                            if api[k].get('star'):
-                                star[k] = api[k]['star']
-                    star = sorted(star.items(), key=lambda d:d[1],reverse=False)
-                    for k in dict(star):
-                        v = api[k]
-                        api.pop(k)
-                        api[k] = v
-                    doc[api['Name']] = api
-
                 elif api.get('Title'):
                     index = api
 
@@ -242,6 +205,28 @@ class Yaml():
                 api['REQUEST']['Headers'].pop('Content-Type')
 
         return doc
+
+
+def star_sort(doc):
+    for api in doc:
+        star = {}
+        for k in api:
+            if 'DATA' in k:
+                for field,value in api[k]['REQUEST'].items():
+                    if  isinstance(value, str) and value == '*':
+                        if not api[k].get('star'):
+                            api[k]['star'] = 1
+                        else:
+                            api[k]['star'] += 1
+                if api[k].get('star'):
+                    star[k] = api[k]['star']
+        star = sorted(star.items(), key=lambda d:d[1],reverse=False)
+        for k in dict(star):
+            v = api[k]
+            api.pop(k)
+            api[k] = v
+
+    return doc
 
 
 def get_doc():
@@ -274,7 +259,7 @@ def get_doc():
             print('--- Please input .xlsx or .yml file ---')
             sys.exit(-1)
 
-    return doc
+    return star_sort(doc)
 
 
 if __name__ == '__main__':
