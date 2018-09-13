@@ -30,9 +30,8 @@ def doo():
              os.path.join(doo_folder, 'example.yml'))
     copyfile(os.path.join(sweetest_dir, 'app.py'),
              os.path.join(doo_folder, 'app.py'))
-    copyfile(os.path.join(sweetest_dir, 'data.py'),
-             os.path.join(doo_folder, 'data.py'))             
     copyfile(os.path.join(sweetest_dir, 'doo.postman_collection.json'),
              os.path.join(doo_folder, 'doo.postman_collection.json'))
 
-    print('\n生成 doo example 成功\n\n请运行如下命令启动示例 Mock 服务\n\ncd doo_example\npython app.py example.yml')
+    print('\n生成 Doo example 成功\n\n本框架是 Sweetest 姊妹篇，使用同一公众号和QQ群，详细使用说明请关注\n公众号：Sweetest自动化测试\nQQ交流群：158755338 (验证码：python)')
+    print('\n\n请运行如下命令启动示例 Mock 服务\n\ncd doo_example\npython app.py example.yml')
