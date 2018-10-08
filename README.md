@@ -28,6 +28,15 @@ QQ 交流群：158755338 (验证码：python)
 
     pip install -U doo
 
+### Apistar 版本说明
+
+Doo 在底层选择了 Apistar 作为 Web 框架，但 Apistar 从 0.6.0 开始转型为 api 工具，不再兼容原有功能；
+所以，如果 Apistar 已经为 0.6.0，请用如下命令降级：
+
+```
+pip install -U apistar==0.5.41
+```
+
 ## 快速体验
 
 ### Mock

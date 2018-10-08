@@ -1,6 +1,6 @@
 --- # 通用描述
-Title: Example 接口文档
-Description: ''
+Title: Example
+Description: Example 接口文档
 Version: '1.0'
 BasePath: http://example.com
 REQUEST_Headers:
@@ -52,6 +52,12 @@ RESPONSE:
     Body: {code: [string, Y, 错误码, 报文里的错误码], message: [string, Y, 提示信息, 出错时信息]}
     nickname: [string, N, 昵称, 用户昵称]
 
+# 可选，需要调用的外部接口，可以依此生成系统调用拓扑图。
+Link:
+    AD: [Account, DB]
+    BS: [User, Info]
+    WeChat: Pay
+
 # 以下为 Mock 测试数据，根据需要填写
 DATA1:
   REQUEST:
@@ -97,7 +103,7 @@ DATA4:
 ---
 Name: USER
 Desc: 获取用户信息
-Path: "/api/user/{user_id}"
+Path: /api/user/{user_id}
 Method: POST
 Auth: None
 GROUP: USER
@@ -138,7 +144,7 @@ DATA2:
 ---
 Name: NEWS
 Desc: 获取新闻详情
-Path: "/api/news"
+Path: /api/news
 Method: GET
 Auth: None
 GROUP: USER
