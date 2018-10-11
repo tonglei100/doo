@@ -247,14 +247,12 @@ def get_doc():
             print(f'--- The api file/folder:{api_file} is not exists ---')
             sys.exit(-1)
     else:
-        if Path('example.xlsx').exists():
-            api_file = str(Path('example.xlsx'))
-            e = Excel(api_file)
-            doc = e.get_data()
-        elif Path('example.yml').exists():
-            api_file = str(Path('example.yml'))
-            y = Yaml(path)
+        if Path('example.yml').exists():
+            y = Yaml(Path('example.yml'))
             doc = y.get_data()
+        elif Path('example.xlsx').exists():
+            e = Excel(Path('example.xlsx'))
+            doc = e.get_data()
         else:
             print('--- Please input .xlsx or .yml file ---')
             sys.exit(-1)

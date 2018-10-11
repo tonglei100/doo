@@ -34,10 +34,38 @@ def home():
 
 
 def check_body(body_doc, body_real, **kwarg):
-    for k in body_doc:
-        # 如果是星号，则匹配所有值
-        if body_doc[k] == '*':
+    for k,v in body_doc.items():
+        # 如果 Mock 数据的值是减号(-)，则真实请求中该字段应该不存在
+        if v == '-':
+            if body_real.get(k):
+                return False
+        # 如果是加号(+)，则真实请求中，该字段存在即可
+        elif v == '+':
+            if not body_real.get(k):
+                return False
+        # 如果是星号(*)，则真实请求中，该字段存在或不存在都可以
+        elif v == '*':
             continue
+        # 如果是星号(*)开头，则真实请求中，模糊匹配
+        elif v.startswith('*'):
+            if not isinstance(body_real.get(k), str):
+                return False
+            elif v[1:] not in body_real.get(k):
+                return False
+        # 如果是上尖号(^)开头，则真实请求中，开头匹配
+        elif v.startswith('^'):
+            if not isinstance(body_real.get(k), str):
+                return False
+            elif not body_real.get(k).startswith(v[1:]):
+                return False
+        # 如果是 Dollar($)开头，则真实请求中，末尾匹配
+        elif v.startswith('^'):
+            if not isinstance(body_real.get(k), str):
+                return False
+            elif not body_real.get(k).endswith(v[1:]):
+                return False
+
+
         if isinstance(body_doc[k], str) and body_doc[k].startswith('\\'):
             body_doc[k] = body_doc[k][1:]
         if k.startswith('{') and k.endswith('}'):
