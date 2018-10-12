@@ -179,7 +179,7 @@ class Yaml():
     def __init__(self, path, mode='r'):
         self.files = []
         if  path.is_dir():
-            self.files = path.glob('*.yml')
+            self.files = list(path.glob('*.yml'))
         elif path.exists():
             if path.suffix == '.yml':
                 self.files.append(path)
@@ -231,6 +231,7 @@ def star_sort(doc):
 
 def get_doc():
 
+    extra_files = []
     doc = {}
     if len(sys.argv) >1:
         api_file = sys.argv[1]
@@ -240,9 +241,11 @@ def get_doc():
             if path.suffix == '.xlsx':
                     e = Excel(api_file)
                     doc = e.get_data()
+                    extra_files.append(path)
             else :
                 y = Yaml(path)
                 doc = y.get_data()
+                extra_files = y.files
         else:
             print(f'--- The api file/folder:{api_file} is not exists ---')
             sys.exit(-1)
@@ -250,14 +253,16 @@ def get_doc():
         if Path('example.yml').exists():
             y = Yaml(Path('example.yml'))
             doc = y.get_data()
+            extra_files.append(Path('example.yml'))
         elif Path('example.xlsx').exists():
             e = Excel(Path('example.xlsx'))
             doc = e.get_data()
+            extra_files.append(Path('example.xlsx'))
         else:
             print('--- Please input .xlsx or .yml file ---')
             sys.exit(-1)
 
-    return star_sort(doc)
+    return star_sort(doc), extra_files
 
 
 if __name__ == '__main__':

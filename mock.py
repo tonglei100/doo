@@ -39,7 +39,7 @@ def check_body(body_doc, body_real, **kwarg):
         if v == '-':
             if body_real.get(k):
                 return False
-        # 如果是加号(+)，则真实请求中，该字段存在即可
+        # 如果是加号(+)，则真实请求中，该字段应该存在，值可以为任意值
         elif v == '+':
             if not body_real.get(k):
                 return False
@@ -47,23 +47,24 @@ def check_body(body_doc, body_real, **kwarg):
         elif v == '*':
             continue
         # 如果是星号(*)开头，则真实请求中，模糊匹配
-        elif v.startswith('*'):
-            if not isinstance(body_real.get(k), str):
-                return False
-            elif v[1:] not in body_real.get(k):
-                return False
-        # 如果是上尖号(^)开头，则真实请求中，开头匹配
-        elif v.startswith('^'):
-            if not isinstance(body_real.get(k), str):
-                return False
-            elif not body_real.get(k).startswith(v[1:]):
-                return False
-        # 如果是 Dollar($)开头，则真实请求中，末尾匹配
-        elif v.startswith('^'):
-            if not isinstance(body_real.get(k), str):
-                return False
-            elif not body_real.get(k).endswith(v[1:]):
-                return False
+        elif isinstance(v, str):
+            if v.startswith('*'):
+                if not isinstance(body_real.get(k), str):
+                    return False
+                elif v[1:] not in body_real.get(k):
+                    return False
+            # 如果是上尖号(^)开头，则真实请求中，开头匹配
+            elif v.startswith('^'):
+                if not isinstance(body_real.get(k), str):
+                    return False
+                elif not body_real.get(k).startswith(v[1:]):
+                    return False
+            # 如果是 Dollar($)开头，则真实请求中，末尾匹配
+            elif v.startswith('$'):
+                if not isinstance(body_real.get(k), str):
+                    return False
+                elif not body_real.get(k).endswith(v[1:]):
+                    return False
 
 
         if isinstance(body_doc[k], str) and body_doc[k].startswith('\\'):
@@ -103,7 +104,7 @@ def response(api, request: http.Request, params, **kwarg):
 
     return http.JSONResponse('No body data matching', status_code=404)
 
-doc = get_doc()
+doc, extra_files = get_doc()
 
 for key in doc:
     desc = doc[key]['Desc']
