@@ -65,6 +65,9 @@ def check_body(body_doc, body_real, **kwarg):
                     return False
                 elif not body_real.get(k).endswith(v[1:]):
                     return False
+            elif v.startswith('#'):
+                if v[1:] == str(body_real.get(k)):
+                    return False
 
 
         if isinstance(body_doc[k], str) and body_doc[k].startswith('\\'):
