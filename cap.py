@@ -25,14 +25,14 @@ class CapApp(App):
                  event_hooks=None):
 
         super().__init__(routes,
-                                  template_dir=None,
-                                  static_dir=None,
-                                  packages=None,
-                                  schema_url='/schema/',
-                                  docs_url='/docs/',
-                                  static_url='/static/',
-                                  components=None,
-                                  event_hooks=None)
+                         template_dir=None,
+                         static_dir=None,
+                         packages=None,
+                         schema_url='/schema/',
+                         docs_url='/docs/',
+                         static_url='/static/',
+                         components=None,
+                         event_hooks=None)
 
     def finalize_wsgi(self, response: Response, start_response: WSGIStartResponse):
         if self.debug and response.exc_info is not None:

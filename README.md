@@ -22,18 +22,22 @@ QQ 交流群：158755338 (验证码：python)
 
 ### 初次安装
 
-    pip install doo
+```shell
+pip install doo
+```
 
 ### 升级
 
-    pip install -U doo
+```shell
+pip install -U doo
+```
 
 ### Apistar 版本说明
 
 Doo 在底层选择了 Apistar 作为 Web 框架，但 Apistar 从 0.6.0 开始转型为 api 工具，不再兼容原有功能；
 所以，如果 Apistar 已经为 0.6.0，请用如下命令降级：
 
-```
+```shell
 pip install -U "apistar<0.6.0"
 ```
 
@@ -92,7 +96,7 @@ example.yml
 
 #### 模板格式
 
-```yml
+```yaml
 --- # 通用描述
 Title: Example 接口文档
 Description: ''
@@ -139,7 +143,6 @@ DATA1:
   status_code: 200  #可选，默认为 200
   delay: 0.5  #可选，默认为 0
   remark: admin 账户登录  #可选，默认为 ''
-
 ```
 
 备注：对单个或多个 yaml 接口文档启动 Mock 时，通用描述部分，只能有1个，如果有多个，则只有最后被读取的那个有效。
@@ -200,7 +203,7 @@ example.xlsx
 
 请求字段为星号(*)，则该字段匹配任意值(包括无该字段)，如
 
-```yml
+```yaml
 DATA1:
   REQUEST:
     account: guess
@@ -218,7 +221,7 @@ Excel 格式的测试数据也一样。
 
 如果要匹配该接口的所有请求，则可以把请求字段都设置为星号(*)，如：
 
-```yml
+```yaml
 DATA1:
   REQUEST:
     account: '*'
