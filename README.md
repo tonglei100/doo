@@ -50,7 +50,7 @@ python app.py
 
 OK，示例 Mock 已经启动起来了。
 
-> 详细文档：https://doc.sweeter.io/doo/
+> 详细文档：https://doc.sweeter.io/#/doo/
 
 ## 加入我们
 
