@@ -1,4 +1,4 @@
-![Doo](https://doc.sweeter.io/docs/_media/doo.png)
+![Doo](https://sweeter.io/docs/_media/doo.png)
 
 # Doo
 
@@ -50,7 +50,7 @@ python app.py
 
 OK，示例 Mock 已经启动起来了。
 
-> 详细文档：https://doc.sweeter.io/#/doo/
+> 详细文档：https://sweeter.io/#/doo/
 
 ## 加入我们
 
@@ -59,4 +59,4 @@ QQ 交流群：**158755338**
 
 微信公众号：**喜文测试**
 
-![QQ2](https://doc.sweeter.io/docs/_media/QQ.png)![WeChat](https://doc.sweeter.io/docs/_media/WeChat.png)
+![QQ2](https://sweeter.io/docs/_media/QQ.png)![WeChat](https://sweeter.io/docs/_media/WeChat.png)
